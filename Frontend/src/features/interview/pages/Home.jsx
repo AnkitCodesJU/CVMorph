@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
+import Loader from '../components/Loader.jsx'
 
 const Home = () => {
 
@@ -23,11 +24,7 @@ const Home = () => {
     }
 
     if (loading) {
-        return (
-            <main className='flex items-center justify-center min-h-screen w-full bg-page'>
-                <h1 className="text-xl font-medium text-text-primary">Loading your interview plan...</h1>
-            </main>
-        )
+        return <Loader text="Generating your personalized strategy..." />
     }
 
     return (

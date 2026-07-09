@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate, useParams } from 'react-router'
+import Loader from '../components/Loader.jsx'
 
 const NAV_ITEMS = [
     { id: 'technical', label: 'Technical Questions', icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>) },
@@ -58,6 +59,7 @@ const Interview = () => {
     const [ activeNav, setActiveNav ] = useState('technical')
     const { report, getReportById, loading, getResumePdf } = useInterview()
     const { interviewId } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (interviewId) {
@@ -68,11 +70,7 @@ const Interview = () => {
 
 
     if (loading || !report) {
-        return (
-            <main className='flex items-center justify-center min-h-screen w-full bg-page'>
-                <h1 className="text-xl font-medium text-text-primary">Loading your interview plan...</h1>
-            </main>
-        )
+        return <Loader text="Loading your interview plan..." />
     }
 
     const scoreColorClass =
@@ -80,7 +78,15 @@ const Interview = () => {
             report.matchScore >= 60 ? 'border-[#f5a623]' : 'border-[#ff4d4d]'
 
     return (
-        <div className='w-full min-h-screen bg-page text-text-primary flex items-stretch p-6 box-border'>
+        <div className='w-full min-h-screen bg-page text-text-primary flex items-stretch p-6 box-border relative'>
+            {/* Close Button */}
+            <button
+                onClick={() => navigate('/')}
+                className='absolute top-6 right-6 w-10 h-10 flex items-center justify-center bg-card border border-border-dark rounded-full text-text-muted hover:text-text-primary hover:border-accent cursor-pointer z-10 transition-colors'
+                aria-label="Go to Home"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
             <div className='flex w-full max-w-[1280px] mx-auto bg-card border border-border-dark rounded-2xl justify-between'>
 
                 {/* ── Left Nav ── */}
