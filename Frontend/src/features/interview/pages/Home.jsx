@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
 import Loader from '../components/Loader.jsx'
+import Logo from '../../../components/Logo.jsx'
 
 const Home = () => {
 
@@ -31,8 +32,9 @@ const Home = () => {
         <div className='flex flex-col items-center justify-center w-full min-h-screen bg-page text-text-primary py-12 px-6 gap-8'>
 
             {/* Page Header */}
-            <header className='text-center'>
-                <h1 className="text-[2.25rem] font-bold mb-2 text-text-primary">Create Your Custom <span className='text-accent'>Interview Plan</span></h1>
+            <header className='text-center flex flex-col items-center gap-4'>
+                <Logo />
+                <h1 className="text-[2.25rem] font-bold mb-2 text-text-primary mt-4">Create Your Custom <span className='text-accent'>Interview Plan</span></h1>
                 <p className="text-[0.95rem] text-text-muted max-w-[480px] mx-auto leading-[1.6]">Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
             </header>
 

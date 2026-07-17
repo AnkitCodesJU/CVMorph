@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import { useNavigate, Link } from 'react-router'
+import Logo from '../../../components/Logo'
 import { useAuth } from '../hooks/useAuth'
 
 const Register = () => {
@@ -24,6 +25,9 @@ const Register = () => {
     return (
         <main className="min-h-screen w-full flex justify-center items-center">
             <div className="min-w-[350px] flex flex-col gap-4">
+                <div className="mb-4 flex justify-center">
+                    <Logo />
+                </div>
                 <h1 className="text-2xl font-bold">Register</h1>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">

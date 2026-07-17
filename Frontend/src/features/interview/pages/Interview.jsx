@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate, useParams } from 'react-router'
 import Loader from '../components/Loader.jsx'
+import Logo from '../../../components/Logo.jsx'
 
 const NAV_ITEMS = [
     { id: 'technical', label: 'Technical Questions', icon: (<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>) },
@@ -92,6 +93,9 @@ const Interview = () => {
                 {/* ── Left Nav ── */}
                 <nav className='w-[220px] shrink-0 p-[1.75rem_1rem] flex flex-col justify-between gap-1'>
                     <div className="flex flex-col gap-1">
+                        <div className="mb-6 flex justify-center scale-75 origin-left">
+                            <Logo />
+                        </div>
                         <p className='text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-text-muted px-3 mb-2 m-0'>Sections</p>
                         {NAV_ITEMS.map(item => (
                             <button
