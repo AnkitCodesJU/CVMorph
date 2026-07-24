@@ -11,11 +11,17 @@ const Login = () => {
 
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
+    const [ error, setError ] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleLogin({email,password})
-        navigate('/')
+        setError("")
+        try {
+            await handleLogin({email,password})
+            navigate('/')
+        } catch (err) {
+            setError(err.response?.data?.message || "Login failed")
+        }
     }
 
     if(loading){
@@ -31,6 +37,7 @@ const Login = () => {
                 </div>
                 <h1 className="text-2xl font-bold">Login</h1>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
                     <div className="flex flex-col gap-2">
                         <label htmlFor="email">Email</label>
                         <input

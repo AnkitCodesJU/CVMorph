@@ -9,13 +9,19 @@ const Register = () => {
     const [ username, setUsername ] = useState("")
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
+    const [ error, setError ] = useState("")
 
     const {loading,handleRegister} = useAuth()
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/")
+        setError("")
+        try {
+            await handleRegister({username,email,password})
+            navigate("/")
+        } catch (err) {
+            setError(err.response?.data?.message || "Registration failed")
+        }
     }
 
     if(loading){
@@ -31,6 +37,7 @@ const Register = () => {
                 <h1 className="text-2xl font-bold">Register</h1>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
 
                     <div className="flex flex-col gap-2">
                         <label htmlFor="username">Username</label>
